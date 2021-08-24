@@ -41,12 +41,6 @@ logging:
 server:
   port: 8081
 
-# pay service 호출 주소
-api:
-  url:
-    pay: http://localhost:8082
-
-
 ---
 
 spring:

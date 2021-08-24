@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Contract
+  name: contract
   labels:
-    app: Contract
+    app: contract
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: Contract
+      app: contract
   template:
     metadata:
       labels:
-        app: Contract
+        app: contract
     spec:
       containers:
-        - name: Contract
-          image: carrentaltest1.azurecr.io/test-contract:v3
+        - name: contract
+          image: carrentaltest.azurecr.io/contract:latest
           ports:
             - containerPort: 8080
           readinessProbe:

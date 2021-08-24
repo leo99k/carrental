@@ -38,11 +38,7 @@ logging:
     org.springframework.cloud: debug
 server:
   port: 8082
-
-# reservation service 호출 주소
-api:
-  url:
-    reservation: http://localhost:8083  
+  
 ---
 
 spring:

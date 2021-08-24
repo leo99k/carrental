@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Mypage
+  name: mypage
   labels:
-    app: Mypage
+    app: mypage
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: Mypage
+      app: mypage
   template:
     metadata:
       labels:
-        app: Mypage
+        app: mypage
     spec:
       containers:
-        - name: Mypage
-          image: username/Mypage:latest
+        - name: mypage
+          image: carrentaltest.azurecr.io/mypage:latest
           ports:
             - containerPort: 8080
           readinessProbe:

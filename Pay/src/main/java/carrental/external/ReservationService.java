@@ -10,7 +10,7 @@ import java.util.Date;
 
 // feignclient 기술 적용
 // url: http://localhost:8083 - application.yaml에 정의함
-@FeignClient(name="reservation", url="http://localhost:8083")
+@FeignClient(name="reservation", url="${api.url.reservation}")
 public interface ReservationService {
     @RequestMapping(method= RequestMethod.POST, path="/reservations")
     public void cancelReservation(@RequestBody Reservation reservation);

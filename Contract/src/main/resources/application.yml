@@ -41,6 +41,11 @@ logging:
 server:
   port: 8081
 
+# pay service 호출 주소
+api:
+  url:
+    pay: http://localhost:8082
+
 ---
 
 spring:
@@ -65,3 +70,8 @@ spring:
           contentType: application/json
         event-out:
           destination: carrental
+
+# pay service 호출 주소
+api:
+  url:
+    pay: http://Pay:8080

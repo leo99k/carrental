@@ -46,7 +46,6 @@ api:
   url:
     pay: http://localhost:8082
 
-
 ---
 
 spring:
@@ -72,3 +71,9 @@ spring:
         event-out:
           destination: carrental
           contentType: application/json
+
+
+# pay service 호출 주소
+api:
+  url:
+    pay: http://Pay:8080

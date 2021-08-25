@@ -2,6 +2,7 @@ package carrental;
 
 import javax.persistence.*;
 import org.springframework.beans.BeanUtils;
+
 import carrental.external.Reservation;
 import carrental.external.ReservationService;
 
@@ -20,26 +21,41 @@ public class Pay {
     @PostPersist
     public void onPostPersist(){
         
-        System.out.println("################### PAY >> REST 결제 호출 #############################");
+        System.out.println("################### PAY >> REST 결제 호출 #############################  " + this.getId());
         Payed payed = new Payed();
         BeanUtils.copyProperties(this, payed);
         payed.setPaystatus("paid");
+        
+        System.out.println("################### PAY >> REST 결제 호출 payed.toJson() #############################  " + payed.toJson());
+        
         payed.publishAfterCommit();
     }
 
 
     @PostUpdate
     public void onPostUpdate(){
-        System.out.println("################### PAY  >> 계약 취소 / 결제취소 호출 #############################");
+        System.out.println("################### PAY  >> 계약 취소 / 결제취소 호출 this.getId() ############################# " + this.getId());
+        System.out.println("################### PAY  >> 계약 취소 / 결제취소 호출 this.getContractId() ############################# " + this.getContractId());
+        this.setContractId(this.getId());
         PayCanceled payCanceled = new PayCanceled();
         BeanUtils.copyProperties(this, payCanceled);
+        payCanceled.setPaystatus("payCanceled");
+        System.out.println("################### PAY  >> 계약 취소 / 결제취소 호출 payCanceled.toJson() ############################# " + payCanceled.toJson() );
+        
         payCanceled.publish();
 
         //Following code causes dependency to external APIs
         // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
 
         Reservation reservation = new Reservation();
-        BeanUtils.copyProperties(payCanceled, reservation);
+        BeanUtils.copyProperties(this, reservation);
+        
+        reservation.setPayStatus("payCanceled");
+        
+        System.out.println("################### PAY  >> 계약 취소 / 결제취소 호출 this.getId() ############################# " + reservation.getContractId());
+        System.out.println("################### PAY  >> 계약 취소 / 결제취소 호출 this.getId() ############################# " + reservation.getReservationStatus());
+        System.out.println("################### PAY  >> 계약 취소 / 결제취소 호출 this.getId() ############################# " + reservation.getPayStatus() );
+        
         // mappings goes here
         PayApplication.applicationContext.getBean(ReservationService.class).cancelReservation(reservation);
     }

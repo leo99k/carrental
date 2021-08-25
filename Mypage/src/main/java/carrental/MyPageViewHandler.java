@@ -20,9 +20,13 @@ public class MyPageViewHandler {
     @StreamListener(KafkaProcessor.INPUT)
     public void whenContractCompleted_then_CREATE_1 (@Payload ContractCompleted contractCompleted) {
         try {
-            System.out.println("########################### 계약 호출 ########################################");
+            
+            if ( !("ContractCompleted".equals(contractCompleted.getEventType()) ) ) return;
+            
             if (!contractCompleted.validate()) return;
 
+            System.out.println("########################### 계약 호출 contractCompleted.toJson() ########################################" + contractCompleted.toJson());
+            
             // view 객체 생성
             MyPage myPage = new MyPage();
             // view 객체에 이벤트의 Value 를 set 함
@@ -41,15 +45,17 @@ public class MyPageViewHandler {
 
     @StreamListener(KafkaProcessor.INPUT)
     public void whenPayed_then_UPDATE_1(@Payload Payed payed) {
-        System.out.println("###########################  결제 호출 ########################################");
+        
+    	if ( !("Payed".equals(payed.getEventType()) ) ) return;
+    	
+    	System.out.println("###########################  결제 호출 payed.toJson() ########################################" + payed.toJson());
         try {
             //if (!payed.validate()) return;
                 // view 객체 조회
-                System.out.println("########################### 2222222222 ########################################");
                     List<MyPage> myPageList = myPageRepository.findByContractId(payed.getContractId());
                     for(MyPage myPage : myPageList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
-                    System.out.println("########################### 333333333 ########################################");
+
                     myPage.setPayStatus(payed.getPaystatus());
                 // view 레파지 토리에 save
                 myPageRepository.save(myPage);
@@ -61,7 +67,10 @@ public class MyPageViewHandler {
     }
     @StreamListener(KafkaProcessor.INPUT)
     public void whenReservated_then_UPDATE_2(@Payload Reservated reservated) {
-        System.out.println("########################### 예약 호출 ########################################");
+        
+    	if ( !("Reservated".equals(reservated.getEventType()) ) ) return;
+    	
+    	System.out.println("########################### 예약 호출 reservated.toJson() ########################################" + reservated.toJson());
         try {
             if (!reservated.validate()) return;
                 // view 객체 조회
@@ -80,7 +89,10 @@ public class MyPageViewHandler {
     }
     @StreamListener(KafkaProcessor.INPUT)
     public void whenPayCanceled_then_UPDATE_3(@Payload PayCanceled payCanceled) {
-        System.out.println("########################### 결제 취소  ########################################");
+    	
+    	if ( !("PayCanceled".equals(payCanceled.getEventType()) ) ) return;
+    	
+        System.out.println("########################### 결제 취소 payCanceled.toJson() ########################################" + payCanceled.toJson());
         try {
             if (!payCanceled.validate()) return;
                 // view 객체 조회
@@ -89,6 +101,7 @@ public class MyPageViewHandler {
                     for(MyPage myPage : myPageList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
                     myPage.setPayStatus(payCanceled.getPaystatus());
+                    myPage.setAmt(0);
                 // view 레파지 토리에 save
                 myPageRepository.save(myPage);
                 }
@@ -99,7 +112,10 @@ public class MyPageViewHandler {
     }
     @StreamListener(KafkaProcessor.INPUT)
     public void whenReservationCanceled_then_UPDATE_4(@Payload ReservationCanceled reservationCanceled) {
-        System.out.println("########################### 예약 취소  ########################################");
+        
+    	if ( !("ReservationCanceled".equals(reservationCanceled.getEventType()) ) ) return;
+    	    	
+    	System.out.println("########################### 예약 취소 reservationCanceled.toJson() ########################################" + reservationCanceled.toJson());
         try {
             if (!reservationCanceled.validate()) return;
                 // view 객체 조회

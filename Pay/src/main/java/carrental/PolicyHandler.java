@@ -17,28 +17,35 @@ public class PolicyHandler{
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverContractCanceled_CancelPay(@Payload ContractCanceled contractCanceled){
 
-        System.out.println("##################### PAY PolicyHandler >> PUB/SUB 예약 취소 호출  ###########################");
+    	System.out.println("##################### PAY PolicyHandler >> PUB/SUB 예약 취소 호출  ###########################");
+    	
+    	if ("ContractCanceled".equals(contractCanceled.getEventType())) {
+    	
+    		System.out.println("##################### PAY PolicyHandler >> PUB/SUB 예약 취소 호출 처리  ###########################");
+    		
+    		try {
+                if(!contractCanceled.validate()) return;
 
-        try {
-            if(!contractCanceled.validate()) return;
-            
+                // 객체 조회
+                Optional<Pay> Optional = payRepository.findById(contractCanceled.getId());
 
-            // 객체 조회
-            Optional<Pay> Optional = payRepository.findByContractId(contractCanceled.getId());
+                if( Optional.isPresent()) {
+                    Pay pay = Optional.get();
 
-            if( Optional.isPresent()) {
-                Pay pay = Optional.get();
-
-                // 객체에 이벤트의 eventDirectValue 를 set 함
-                pay.setCustName(contractCanceled.getCustName());
-                pay.setModelName(contractCanceled.getModelName());
-                pay.setAmt(contractCanceled.getAmt());
-                // 레파지 토리에 save
-                payRepository.save(pay);
+                    // 객체에 이벤트의 eventDirectValue 를 set 함
+                    pay.setCustName(contractCanceled.getCustName());
+                    pay.setModelName(contractCanceled.getModelName());
+                    pay.setAmt(contractCanceled.getAmt());
+                    // 레파지 토리에 save
+                    payRepository.save(pay);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+    	} else {
+    		System.out.println("##################### PAY PolicyHandler >> PUB/SUB 예약 취소 pass  ###########################");
+    	}
     }
 
 

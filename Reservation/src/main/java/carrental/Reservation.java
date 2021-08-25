@@ -24,15 +24,18 @@ public class Reservation {
         System.out.println("################### Reservation >> 예약 호출 ##############################");
         Reservated reservated = new Reservated();
         BeanUtils.copyProperties(this, reservated);
+        System.out.println("################### Reservation >> 예약 호출 reservated.toJson() ##############################" + reservated.toJson());
         reservated.publishAfterCommit();
 
     }
     @PostUpdate
     public void onPostUpdate(){
-        System.out.println("################### Reservation >>  예약 취소 호출 ##############################");
+        System.out.println("################### Reservation >>  예약 취소 호출 ##############################" + this.getId());
+        System.out.println("################### Reservation >>  예약 취소 호출 getContractId##############################" + this.getContractId());
         ReservationCanceled reservationCanceled = new ReservationCanceled();
         BeanUtils.copyProperties(this, reservationCanceled);
         reservationCanceled.setReservationStatus("reservationCanceled");
+        System.out.println("################### Reservation >>  예약 취소 호출 reservationCanceled.toJson() ##############################" + reservationCanceled.toJson());
         reservationCanceled.publishAfterCommit();
     }
 

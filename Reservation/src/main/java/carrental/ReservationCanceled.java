@@ -3,7 +3,7 @@ package carrental;
 public class ReservationCanceled extends AbstractEvent {
 
     private Long id;
-    private String reservationId;
+    private Long contractId;
     private String custName;
     private String modelName;
     private Integer amt;
@@ -21,12 +21,12 @@ public class ReservationCanceled extends AbstractEvent {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getReservationId() {
-        return reservationId;
+    public Long getContractId() {
+        return contractId;
     }
 
-    public void setReservationId(String reservationId) {
-        this.reservationId = reservationId;
+    public void setContractId(Long contractId) {
+        this.contractId = contractId;
     }
     public String getCustName() {
         return custName;

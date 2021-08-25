@@ -21,7 +21,7 @@ public class ReservationCanceled extends AbstractEvent {
         return contractId;
     }
 
-    public void setReservationId(Long contractId) {
+    public void setContractId(Long contractId) {
         this.contractId = contractId;
     }
     public String getCustName() {

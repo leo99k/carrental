@@ -15,18 +15,30 @@ public class PolicyHandler{
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverPayed_Reservate(@Payload Payed payed){
         System.out.println("################### Reservation / PolicyHandler >> PUB/SUB 예약 호출 ##############################");
-        if(!payed.validate()) return;
+        
+        if ("Payed".equals(payed.getEventType())) {
+        	
+        	System.out.println("################### Reservation / PolicyHandler >> PUB/SUB 예약 호출 처리 payed.toJson() ##############################" + payed.toJson());
+        	
+        	if(!payed.validate()) return;
 
-        // Sample Logic //
-        Reservation reservation = new Reservation();
-        reservation.setContractId(payed.getContractId());
-        reservation.setCustName(payed.getCustName());
-        reservation.setModelName(payed.getModelName());
-        reservation.setAmt(payed.getAmt());
-        reservation.setPayStatus(payed.getPaystatus());
-        reservation.setReservationStatus("reserved");
-
-        reservationRepository.save(reservation);
+            // Sample Logic //
+            Reservation reservation = new Reservation();
+            reservation.setContractId(payed.getContractId());
+            reservation.setCustName(payed.getCustName());
+            reservation.setModelName(payed.getModelName());
+            reservation.setAmt(payed.getAmt());
+            reservation.setPayStatus(payed.getPaystatus());
+            reservation.setReservationStatus("reserved");
+            System.out.println("################### 1111111111 payed.toJson() ##############################" + payed.toJson());
+            reservationRepository.save(reservation);
+            
+        } else {
+        	System.out.println("################### Reservation / PolicyHandler >> PUB/SUB 예약 호출 pass ##############################");
+        }
+        
+        
+        
     }
 
 

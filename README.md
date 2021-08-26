@@ -21,3 +21,81 @@
 성능
 고객이 자주 상점관리에서 확인할 수 있는 배달상태를 주문시스템(프론트엔드)에서 확인할 수 있어야 한다 CQRS
 배달상태가 바뀔때마다 카톡 등으로 알림을 줄 수 있어야 한다 Event driven
+
+
+
+
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: Contract
+          uri: http://localhost:8081
+          predicates:
+            - Path=/contracts/** 
+        - id: Pay
+          uri: http://localhost:8082
+          predicates:
+            - Path=/pays/** 
+        - id: Reservation
+          uri: http://localhost:8083
+          predicates:
+            - Path=/reservations/** 
+        - id: Mypage
+          uri: http://localhost:8084
+          predicates:
+            - Path= /myPages/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: Contract
+          uri: http://Contract:8080
+          predicates:
+            - Path=/contracts/** 
+        - id: Pay
+          uri: http://Pay:8080
+          predicates:
+            - Path=/pays/** 
+        - id: Reservation
+          uri: http://Reservation:8080
+          predicates:
+            - Path=/reservations/** 
+        - id: Mypage
+          uri: http://Mypage:8080
+          predicates:
+            - Path= /myPages/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080

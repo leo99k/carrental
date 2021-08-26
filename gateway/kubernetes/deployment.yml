@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: gateway
-          image: carrentaltest.azurecr.io/gateway:latest
+          image: user05.azurecr.io/gateway:v1
           ports:
             - containerPort: 8080

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: reservation
-          image: carrentaltest.azurecr.io/reservation:latest
+          image: user05.azurecr.io/reservation:v1
           ports:
             - containerPort: 8080
           readinessProbe:

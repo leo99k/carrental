@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: mypage
-          image: carrentaltest.azurecr.io/mypage:latest
+          image: user05.azurecr.io/mypage:v1
           ports:
             - containerPort: 8080
           readinessProbe:

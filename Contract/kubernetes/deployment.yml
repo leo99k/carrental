@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: contract
-          image: carrentaltest.azurecr.io/contract:latest
+          image: user05.azurecr.io/contract:v1
           ports:
             - containerPort: 8080
 #          resources:

@@ -5,6 +5,9 @@
 - 체크포인트 : https://workflowy.com/s/assessment-check-po/T5YrzcMewfo4J6LW
 
 
+![image](https://user-images.githubusercontent.com/18524113/130928072-4b0e0325-48ab-4245-bbbb-98b7c9423ff3.png)
+
+
 # Table of contents
 
 - [예제 - 음식배달](#---)

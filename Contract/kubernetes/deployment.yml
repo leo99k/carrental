@@ -25,12 +25,12 @@ spec:
 #            requests:
 #              cpu: 200m
           ## Config map Set start
-		  env:
-		    - name: SYSTEM_MODE
-		    valueFrom:
-		      configMapKeyRef:
-                name: systemmode
-                key: sysmodeval
+          env:
+            - name: SYSTEM_MODE
+              valueFrom:
+                configMapKeyRef:
+                  name: systemmode
+                  key: sysmodeval
           ## Config map Set end
           readinessProbe:
             httpGet:

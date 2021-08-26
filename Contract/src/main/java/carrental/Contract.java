@@ -21,9 +21,9 @@ public class Contract {
     public void onPostPersist(){
     	
     	// configMap 테스트
-        //String sysMode = System.getenv("SYSTEM_MODE");
-        //if(sysMode == null) sysMode = "LOCAL_SYSTEM";
-        //System.out.println("################## 현재 접속중인 시스템 : " + sysMode);
+        String sysMode = System.getenv("SYSTEM_MODE");
+        if(sysMode == null) sysMode = "LOCAL_SYSTEM";
+        System.out.println("################## 현재 접속중인 시스템 : " + sysMode);
     	
         System.out.println("################### Contract >> 계약 생성 ##############################");
         ContractCompleted contractCompleted = new ContractCompleted();

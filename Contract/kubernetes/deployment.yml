@@ -19,6 +19,14 @@ spec:
           image: carrentaltest.azurecr.io/contract:latest
           ports:
             - containerPort: 8080
+          ## Config map Set start
+		  env:
+		    - name: SYSTEM_MODE
+		    valueFrom:
+		      configMapKeyRef:
+                name: systemmode
+                key: sysmodeval
+          ## Config map Set end
           readinessProbe:
             httpGet:
               path: '/actuator/health'

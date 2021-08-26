@@ -38,6 +38,7 @@ logging:
   level:
     org.hibernate.type: trace
     org.springframework.cloud: debug
+
 server:
   port: 8081
 
@@ -45,6 +46,16 @@ server:
 api:
   url:
     pay: http://localhost:8082
+# circuit breaker 설정 start
+
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution.isolation.thread.timeoutInMilliseconds: 610
+# circuit breaker 설정 end
 
 ---
 
@@ -75,3 +86,14 @@ spring:
 api:
   url:
     pay: http://Pay:8080
+# circuit breaker 설정 start
+
+feign:
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution.isolation.thread.timeoutInMilliseconds: 610
+# circuit breaker 설정 end

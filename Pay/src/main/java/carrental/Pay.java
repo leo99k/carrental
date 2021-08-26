@@ -21,14 +21,26 @@ public class Pay {
     @PostPersist
     public void onPostPersist(){
         
-        System.out.println("################### PAY >> REST 결제 호출 #############################  " + this.getId());
+        System.out.println("################### 111111 PAY >> REST 결제 호출 #############################  " + this.getId());
         Payed payed = new Payed();
         BeanUtils.copyProperties(this, payed);
         payed.setPaystatus("paid");
         
-        System.out.println("################### PAY >> REST 결제 호출 payed.toJson() #############################  " + payed.toJson());
+        System.out.println("################### 111111 PAY >> REST 결제 호출 payed.toJson() #############################  " + payed.toJson());
         
         payed.publishAfterCommit();
+        
+        try {
+        	System.out.println("################### 지연 설정 처리  #############################  ");
+            Thread.currentThread().sleep((long) (400 + Math.random() * 220));
+        } catch (InterruptedException e) {
+        	System.out.println("################### 지연 설정 처리 에러남  #############################  ");
+            e.printStackTrace();
+        }
+        
+        
+        
+        
     }
 
 

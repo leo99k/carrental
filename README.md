@@ -35,13 +35,13 @@
 7. 고객이 결제 및 예약 상태를 한화면에서 확인 할 수 있다.
 
 비기능적 요구사항
-1. 트랜잭션
-  1) 계약이 되지 않은 결제는 아예 성립되지 않아야 한다 Sync 호출
-2. 장애격리
-  1) 예약 기능이 수행되지 않더라도 계약은 365일 24시간 받을 수 있어야 한다 Async (event-driven), Eventual Consistency
-  2) 결제시스템이 과중되면 사용자를 잠시동안 받지 않고 결제를 잠시후에 하도록 유도한다 Circuit breaker, fallback
-3. 성능
-  1) 계약자가 일련의 차량 계약에 대한 상태를 조회 화면(MyPage)에서 확인할 수 있어야 한다 CQRS
+  - 트랜잭션
+    - 계약이 되지 않은 결제는 아예 성립되지 않아야 한다 Sync 호출
+  - 장애격리
+    - 예약 기능이 수행되지 않더라도 계약은 365일 24시간 받을 수 있어야 한다 Async (event-driven), Eventual Consistency
+    - 결제시스템이 과중되면 사용자를 잠시동안 받지 않고 결제를 잠시후에 하도록 유도한다 Circuit breaker, fallback
+  - 성능
+    - 계약자가 일련의 차량 계약에 대한 상태를 조회 화면(MyPage)에서 확인할 수 있어야 한다 CQRS
 
 # 체크포인트
 - 체크포인트 : https://workflowy.com/s/assessment-check-po/T5YrzcMewfo4J6LW

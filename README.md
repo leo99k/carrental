@@ -531,7 +531,11 @@ kubectl apply -f Reservation/kubernetes/service.yaml
 ```java 
 http GET http://20.200.224.11:8080/reservations  >> 장애 동안 발생한 계약이 정상적으로 처리되어 있음.
 ```
-![image](https://user-images.githubusercontent.com/18524113/131065101-cadc0c5c-7b2a-45cf-9bed-c73b7376354b.png)
+![image](https://user-images.githubusercontent.com/18524113/131065338-cd110f00-41c9-4662-afab-fb4f5c164217.png)
+
+
+
+
 
 #폴리글랏-퍼시스턴스
 앱프런트 (app) 는 서비스 특성상 많은 사용자의 유입과 상품 정보의 다양한 콘텐츠를 저장해야 하는 특징으로 인해 RDB 보다는 Document DB / NoSQL 계열의 데이터베이스인 Mongo DB 를 사용하기로 하였다. 이를 위해 order 의 선언에는 @Entity 가 아닌 @Document 로 마킹되었으며, 별다른 작업없이 기존의 Entity Pattern 과 Repository Pattern 적용과 데이터베이스 제품의 설정 (application.yml) 만으로 MongoDB 에 부착시켰다

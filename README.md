@@ -136,7 +136,7 @@ mvn spring-boot:run
 ```
 
 
-#ddd-의-적용
+# ddd-의-적용
 각 서비스내에 도출된 핵심 Aggregate Root 객체를 Entity 로 선언하였다: (예시는 Contract 마이크로 서비스). 
 
 ```java 

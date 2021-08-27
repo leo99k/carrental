@@ -339,7 +339,7 @@ port: 8080
 ![image](https://user-images.githubusercontent.com/11002207/131057389-8d7604ae-7756-45da-8472-d162379b299b.png)
 
 
-#CQRS/saga/correlation
+# CQRS/saga/correlation
 Materialized View를 구현하여, 타 마이크로서비스의 데이터 원본에 접근없이(Composite 서비스나 조인SQL 등 없이)도 내 서비스의 화면 구성과 잦은 조회가 가능하게 구현해 두었다. 본 프로젝트에서 View 역할은 MyPages 서비스가 수행한다.
 - 비동기식으로 처리되어 발행된 이벤트 기반 Kafka 를 통해 수신/처리 되어 별도 Table 에 관리한다
 - viewpage MSA ViewHandler 를 통해 구현

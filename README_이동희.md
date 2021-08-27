@@ -8,7 +8,7 @@
   - [구현:](#구현-)
     - [DDD 의 적용](#ddd-의-적용)
     - [GateWay 적용](#GateWay-적용)
-    - [CQRS/saga/correlation](#폴리글랏-퍼시스턴스)
+    - [CQRS/saga/correlation](#CQRS/saga/correlation)
     - [동기식 호출 과 Fallback 처리](#동기식-호출-과-Fallback-처리)
     - [비동기식 호출 과 Eventual Consistency](#비동기식-호출-과-Eventual-Consistency)
     - [폴리글랏 퍼시스턴스](#폴리글랏-퍼시스턴스)
@@ -43,7 +43,7 @@
 3.	성능
 	i.	계약자가 일련의 차량 계약에 대한 상태를 조회 화면(MyPage)에서 확인할 수 있어야 한다 CQRS
 
-#체크포인트
+# 체크포인트
 - 체크포인트 : https://workflowy.com/s/assessment-check-po/T5YrzcMewfo4J6LW
 
 
@@ -106,6 +106,7 @@
 
 # Event Storming 결과
 * MSAez 로 모델링한 이벤트스토밍 결과
+* 
 ![image](https://user-images.githubusercontent.com/11002207/130976216-5507d61c-696a-4098-b402-95da99d7e3a9.png)
 
 # 헥사고날 아키텍처 다이어그램 도출
@@ -132,7 +133,8 @@ mvn spring-boot:run
 ```
 
 
-#ddd-의-적용
+# ddd-의-적용
+
 각 서비스내에 도출된 핵심 Aggregate Root 객체를 Entity 로 선언하였다: (예시는 Contract 마이크로 서비스). 
 
 ```java 
@@ -244,7 +246,8 @@ http GET http://20.200.225.192:8080/reservations/2
 ![image](https://user-images.githubusercontent.com/11002207/131057205-149bbc5d-1cb8-40d8-9116-a2a59a787f4f.png)
 
 
-#GateWay-적용
+# GateWay-적용
+
 API GateWay를 통하여 마이크로 서비스들의 집입점을 통일할 수 있다. 다음과 같이 GateWay를 적용하였다.
 
 ```java 
@@ -331,7 +334,8 @@ port: 8080
 ![image](https://user-images.githubusercontent.com/11002207/131057389-8d7604ae-7756-45da-8472-d162379b299b.png)
 
 
-#CQRS/saga/correlation
+# CQRS/saga/correlation
+
 Materialized View를 구현하여, 타 마이크로서비스의 데이터 원본에 접근없이(Composite 서비스나 조인SQL 등 없이)도 내 서비스의 화면 구성과 잦은 조회가 가능하게 구현해 두었다. 본 프로젝트에서 View 역할은 MyPages 서비스가 수행한다.
 - 비동기식으로 처리되어 발행된 이벤트 기반 Kafka 를 통해 수신/처리 되어 별도 Table 에 관리한다
 - viewpage MSA ViewHandler 를 통해 구현
@@ -341,10 +345,13 @@ Materialized View를 구현하여, 타 마이크로서비스의 데이터 원본
 ![image](https://user-images.githubusercontent.com/11002207/131057480-8450645e-4425-4a2d-a1d3-d4b16d4af82f.png)
 
 계약 실행 후 MyPages 화면
+
 ![image](https://user-images.githubusercontent.com/11002207/131057509-c690ac7b-b976-477a-b648-025f90dce1f1.png)
 
 계약취소 취소 후 MyPages 화면
+
 ** 의미상으로 결제금액이 0으로 수정이 발생하면 취소로 판단하였음.
+
 ![image](https://user-images.githubusercontent.com/11002207/131057532-81eb1449-70de-40fe-9ba1-9f76aa6a00de.png)
 
 위와 같이 계약을 하게 되면 Contract > Pay > Reservation > MyPage로 계약이 생성되고 상태가 reserved 상태로 되고, 계약 취소가 되면 상태가 reservationCancelled로 변경되는 것을 볼 수 있다.
@@ -352,7 +359,8 @@ Materialized View를 구현하여, 타 마이크로서비스의 데이터 원본
 위 결과로 서로 다른 마이크로 서비스 간에 트랜잭션이 묶여 있음을 알 수 있다.
 
 
-#동기식-호출-과-Fallback-처리
+# 동기식-호출-과-Fallback-처리
+
 분석단계에서의 조건 중 하나로 계약(Contract)->결제(Pay) 간의 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리하기로 하였다. 호출 프로토콜은 이미 앞서 Rest Repository 에 의해 노출되어있는 REST 서비스를 FeignClient 를 이용하여 호출하도록 한다.
 
 - 결제서비스를 호출하기 위하여 Stub과 (FeignClient) 를 이용하여 Service 대행 인터페이스 (Proxy) 를 구현
@@ -422,7 +430,8 @@ http POST http://20.200.228.84:8080/contracts custName="고객2" modelName="그�
 - 또한 과도한 요청시에 서비스 장애가 도미노 처럼 벌어질 수 있다. (서킷브레이커, 폴백 처리는 운영단계에서 설명한다.)
 
 
-#동기식-호출-과-Fallback-처리
+# 동기식-호출-과-Fallback-처리
+
 - 서킷 브레이킹 프레임워크의 선택: Spring FeignClient + Hystrix 옵션을 사용하여 구현함
 시나리오는 계약(Contract)-->결제(Pay) 시의 연결을 RESTful Request/Response 로 연동하여 구현이 되어있고, 결제 요청이 과도할 경우 CB 를 통하여 장애격리.
 
@@ -471,13 +480,16 @@ Pay.java
 siege -c100 -t60S -v --content-type "application/json" 'http://20.200.226.177:8080/contracts POST {"custName": "siege1", "modelName": "부하테스트", "amt": 150}'
 ```
 ![image](https://user-images.githubusercontent.com/11002207/131058325-9ca7c0a2-bda6-413e-a35f-7be0a5895c47.png)
+
 --중략—
+
 ![image](https://user-images.githubusercontent.com/11002207/131058353-c08a4dc5-d517-450f-9084-af7e2b57676c.png)
 
 - 운영시스템은 죽지 않고 지속적으로 CB 에 의하여 적절히 회로가 열림과 닫힘이 벌어지면서 자원을 보호하고 있음을 보여줌. 하지만, 83.34% 가 성공하였고, 17%가 실패했다는 것은 고객 사용성에 있어 좋지 않기 때문에 Retry 설정과 동적 Scale out (replica의 자동적 추가,HPA) 을 통하여 시스템을 확장 해주는 후속처리가 필요.
 
 
-#비동기식-호출-과-Eventual-Consistency
+# 비동기식-호출-과-Eventual-Consistency
+
 계약을 요청한 후 결제가 완료되고(동기식호출) 후 예약 처리시 비동기식으로 처리하여 예약 시스템의 문제로 인해 계약/결제 처리가 블로킹 되지 않도록 처리한다.
 - 이를 위하여 결제 처리 후 곧바로 예약 처리를 호출하는 도메인 이벤트를 카프카로 송출한다(Publish)
 ```java 
@@ -579,5 +591,7 @@ http GET http://20.200.224.11:8080/reservations  >> 장애 동안 발생한 계�
 ```
 ![image](https://user-images.githubusercontent.com/11002207/131059112-12e8a8b4-a9dc-4b4e-9e64-563c393123ed.png)
 
-#폴리글랏-퍼시스턴스
+
+# 폴리글랏-퍼시스턴스
+
 앱프런트 (app) 는 서비스 특성상 많은 사용자의 유입과 상품 정보의 다양한 콘텐츠를 저장해야 하는 특징으로 인해 RDB 보다는 Document DB / NoSQL 계열의 데이터베이스인 Mongo DB 를 사용하기로 하였다. 이를 위해 order 의 선언에는 @Entity 가 아닌 @Document 로 마킹되었으며, 별다른 작업없이 기존의 Entity Pattern 과 Repository Pattern 적용과 데이터베이스 제품의 설정 (application.yml) 만으로 MongoDB 에 부착시켰다

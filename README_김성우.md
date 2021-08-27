@@ -29,4 +29,7 @@ Readiness 설정 적용 전
 ```
 siege -c1 -t120S -v --content-type "application/json" 'http://20.200.226.177:8080/contracts POST {"custName": "siege1", "modelName": "부하테스트", "amt": 150}'
 ```
+Contrant 서비스의 deployment.yml 파일을 deployment_v2.yml 버전으로 생성한 후
+kubectl apply -f deployment_v2.yml 로 버전을 변경하여 배포를 수행한다.
 
+![image](https://user-images.githubusercontent.com/18524113/131059681-0d99b7dc-0281-4355-865d-df19db086eb7.png)

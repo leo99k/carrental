@@ -136,7 +136,7 @@ mvn spring-boot:run
 ```
 
 
-# DDD-의-적용
+- DDD-의-적용
 각 서비스내에 도출된 핵심 Aggregate Root 객체를 Entity 로 선언하였다: (예시는 Contract 마이크로 서비스). 
 
 ```java 
@@ -252,7 +252,7 @@ http GET http://20.200.226.177:8080/contracts/1
 
 
 
-# GateWay-적용
+- GateWay-적용
 API GateWay를 통하여 마이크로 서비스들의 집입점을 통일할 수 있다. 다음과 같이 GateWay를 적용하였다.
 
 ```java 
@@ -339,7 +339,7 @@ port: 8080
 ![image](https://user-images.githubusercontent.com/11002207/131057389-8d7604ae-7756-45da-8472-d162379b299b.png)
 
 
-# CQRS/saga/correlation
+- CQRS/saga/correlation
 Materialized View를 구현하여, 타 마이크로서비스의 데이터 원본에 접근없이(Composite 서비스나 조인SQL 등 없이)도 내 서비스의 화면 구성과 잦은 조회가 가능하게 구현해 두었다. 본 프로젝트에서 View 역할은 MyPages 서비스가 수행한다.
 - 비동기식으로 처리되어 발행된 이벤트 기반 Kafka 를 통해 수신/처리 되어 별도 Table 에 관리한다
 - viewpage MSA ViewHandler 를 통해 구현
@@ -360,7 +360,7 @@ Materialized View를 구현하여, 타 마이크로서비스의 데이터 원본
 위 결과로 서로 다른 마이크로 서비스 간에 트랜잭션이 묶여 있음을 알 수 있다.
 
 
-#동기식-호출-과-Fallback-처리
+- #동기식-호출-과-Fallback-처리
 분석단계에서의 조건 중 하나로 계약(Contract)->결제(Pay) 간의 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리하기로 하였다. 호출 프로토콜은 이미 앞서 Rest Repository 에 의해 노출되어있는 REST 서비스를 FeignClient 를 이용하여 호출하도록 한다.
 
 - 결제서비스를 호출하기 위하여 Stub과 (FeignClient) 를 이용하여 Service 대행 인터페이스 (Proxy) 를 구현

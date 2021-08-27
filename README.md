@@ -104,12 +104,12 @@
 
 # 분석/설계
 
-# Event Storming 결과
-* MSAez 로 모델링한 이벤트스토밍 결과
-![image](https://user-images.githubusercontent.com/11002207/130976216-5507d61c-696a-4098-b402-95da99d7e3a9.png)
+  - Event Storming 결과
+    -MSAez 로 모델링한 이벤트스토밍 결과
+    ![image](https://user-images.githubusercontent.com/11002207/130976216-5507d61c-696a-4098-b402-95da99d7e3a9.png)
 
-# 헥사고날 아키텍처 다이어그램 도출
-
+  - 헥사고날 아키텍처 다이어그램 도출
+  ![image](https://user-images.githubusercontent.com/18524113/131060744-03ff0c32-b624-423e-8ab8-b05dbf9800ad.png)
 
 # 구현
 분석/설계 단계에서 도출된 헥사고날 아키텍처에 따라, 각 BC별로 대변되는 마이크로 서비스들을 스프링부트로 구현하였다. 구현한 각 서비스를 로컬에서 실행하는 방법은 아래와 같다 (각자의 포트넘버는 8081 ~ 808n 이다)

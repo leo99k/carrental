@@ -63,3 +63,23 @@ kubectl apply -f deployment_v2.yml 로 버전을 변경하여 배포를 수행�
 
 ![image](https://user-images.githubusercontent.com/18524113/131060241-6edb73b5-ccd1-4a5d-adf2-ca4585a75f2d.png)
 
+
+
+
+Liveness Probe
+order 서비스 deployment.yml livenessProbe 설정을 사용하지 않는 포트인 8089로 변경하여 서비스가 비정상 상태로 인식하도록 배포 하여 liveness probe 가 동작함을 확인
+```
+livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8089
+            initialDelaySeconds: 15
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+```
+![image](https://user-images.githubusercontent.com/18524113/131060315-db89adb7-521d-4cd0-b444-63eb9fb95ad7.png)
+
+![image](https://user-images.githubusercontent.com/18524113/131060338-3ff7e52d-5a9c-45cb-b8b9-78b2d73b09be.png)
+
+![image](https://user-images.githubusercontent.com/18524113/131060368-3bb973ef-7e47-48c5-87bc-02dd5a537070.png)

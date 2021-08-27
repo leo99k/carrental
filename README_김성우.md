@@ -33,3 +33,20 @@ Contrant 서비스의 deployment.yml 파일을 deployment_v2.yml 버전으로 �
 kubectl apply -f deployment_v2.yml 로 버전을 변경하여 배포를 수행한다.
 
 ![image](https://user-images.githubusercontent.com/18524113/131059681-0d99b7dc-0281-4355-865d-df19db086eb7.png)
+
+배포중 서비스 중단으로 인해 Availability 가 28% 임을 확인할 수 있다.
+![image](https://user-images.githubusercontent.com/18524113/131059764-dc965941-565d-44c8-87b9-a295466f94b9.png)
+
+
+Readiness 설정 적용 후
+배포 파일에 설정을 적용한다.
+```
+readinessProbe:
+  httpGet:
+    path: '/actuator/health'
+    port: 8080
+  initialDelaySeconds: 10
+  timeoutSeconds: 2
+  periodSeconds: 5
+  failureThreshold: 10
+```

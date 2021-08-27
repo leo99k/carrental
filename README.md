@@ -340,26 +340,21 @@ port: 8080
 
 
 
-  - CQRS/saga/correlation
+- CQRS/saga/correlation
 
-    - Materialized View를 구현하여, 타 마이크로서비스의 데이터 원본에 접근없이(Composite 서비스나 조인SQL 등 없이)도 내 서비스의 화면 구성과 잦은 조회가 가능하게 구현해 두었다. 본 프로젝트에서 View 역할은 MyPages 서비스가 수행한다.
-    - 비동기식으로 처리되어 발행된 이벤트 기반 Kafka 를 통해 수신/처리 되어 별도 Table 에 관리한다
-    - viewpage MSA ViewHandler 를 통해 구현
-
+  - Materialized View를 구현하여, 타 마이크로서비스의 데이터 원본에 접근없이(Composite 서비스나 조인SQL 등 없이)도 내 서비스의 화면 구성과 잦은 조회가 가능하게 구현해 두었다. 본 프로젝트에서 View 역할은 MyPages 서비스가 수행한다.
+  - 비동기식으로 처리되어 발행된 이벤트 기반 Kafka 를 통해 수신/처리 되어 별도 Table 에 관리한다
+  - viewpage MSA ViewHandler 를 통해 구현
 ![image](https://user-images.githubusercontent.com/18524113/131063233-ff00a9cc-df94-4b7f-8360-42e59e2011c1.png)
-
 ![image](https://user-images.githubusercontent.com/18524113/131063282-488933d5-187d-4f10-bb7d-f7a5be4febe8.png)
-
-    - 계약 실행 후 MyPages 화면
-
+  - 계약 실행 후 MyPages 화면
 ![image](https://user-images.githubusercontent.com/11002207/131057509-c690ac7b-b976-477a-b648-025f90dce1f1.png)
 
-    - 계약취소 취소 후 MyPages 화면
-      - ** 의미상으로 결제금액이 0으로 수정이 발생하면 취소로 판단하였음.
+  - 계약취소 취소 후 MyPages 화면
+    - ** 의미상으로 결제금액이 0으로 수정이 발생하면 취소로 판단하였음.
 ![image](https://user-images.githubusercontent.com/11002207/131057532-81eb1449-70de-40fe-9ba1-9f76aa6a00de.png)
-
-      - 위와 같이 계약을 하게 되면 Contract > Pay > Reservation > MyPage로 계약이 생성되고 상태가 reserved 상태로 되고, 계약 취소가 되면 상태가 reservationCancelled로 변경되는 것을 볼 수 있다.
-      - 또한 Correlation을 Key를 활용하여 Id를 Key값을 하고 원하는 주문하고 서비스간의 공유가 이루어 졌다.
+    - 위와 같이 계약을 하게 되면 Contract > Pay > Reservation > MyPage로 계약이 생성되고 상태가 reserved 상태로 되고, 계약 취소가 되면 상태가 reservationCancelled로 변경되는 것을 볼 수 있다.
+    - 또한 Correlation을 Key를 활용하여 Id를 Key값을 하고 원하는 주문하고 서비스간의 공유가 이루어 졌다.
 위 결과로 서로 다른 마이크로 서비스 간에 트랜잭션이 묶여 있음을 알 수 있다.
 
 

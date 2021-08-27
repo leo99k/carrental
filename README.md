@@ -64,43 +64,7 @@ spring:
 
 ---
 
-```yaml
-
-spring:
-  profiles: docker
-  cloud:
-    gateway:
-      routes:
-        - id: Contract
-          uri: http://Contract:8080
-          predicates:
-            - Path=/contracts/** 
-        - id: Pay
-          uri: http://Pay:8080
-          predicates:
-            - Path=/pays/** 
-        - id: Reservation
-          uri: http://Reservation:8080
-          predicates:
-            - Path=/reservations/** 
-        - id: Mypage
-          uri: http://Mypage:8080
-          predicates:
-            - Path= /myPages/**
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins:
-              - "*"
-            allowedMethods:
-              - "*"
-            allowedHeaders:
-              - "*"
-            allowCredentials: true
-
-server:
-  port: 8080
------------------------
+```
 
 
 

@@ -411,7 +411,7 @@ kubectl delete deploy,service pay
 http POST http://20.200.228.84:8080/contracts custName="고객1" modelName="쏘나타" amt=100  >> #실패
 http POST http://20.200.228.84:8080/contracts custName="고객2" modelName="그랜저" amt=200  >> #실패
 ```
-![image](https://user-images.githubusercontent.com/11002207/131057748-f0321f5c-9172-4292-8daf-cbf213c990f3.png)
+![image](https://user-images.githubusercontent.com/18524113/131064128-f3c0f040-ec52-4ad6-9ca6-f025ae906f4a.png)
 
 - 결제서비스 재기동
 ```java 
@@ -424,7 +424,7 @@ kubectl apply -f Pay/kubernetes/service.yaml
 http POST http://20.200.228.84:8080/contracts custName="고객1" modelName="쏘나타" amt=100  >> #성공
 http POST http://20.200.228.84:8080/contracts custName="고객2" modelName="그랜저" amt=200  >> #성공
 ```
-![image](https://user-images.githubusercontent.com/11002207/131057836-e46a86f3-1a8f-41bc-afc8-6cf6b7de0560.png)
+![image](https://user-images.githubusercontent.com/18524113/131064210-c761c9e7-e11d-4469-85b4-b1d725f11723.png)
 
 - 또한 과도한 요청시에 서비스 장애가 도미노 처럼 벌어질 수 있다. (서킷브레이커, 폴백 처리는 운영단계에서 설명한다.)
 

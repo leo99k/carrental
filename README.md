@@ -238,13 +238,13 @@ public interface ContractRepository extends PagingAndSortingRepository<Contract,
 }
 ```
 
-적용 후 REST API의 테스트
-- Contract 서비스의 렌탈계약처리
+- 적용 후 REST API의 테스트
+  - Contract 서비스의 렌탈계약처리
 http POST http://20.200.226.177:8080/contracts custName="고객1" modelName="쏘나타" amt=100
 
 ![image](https://user-images.githubusercontent.com/18524113/131062560-15d38a5a-8898-4492-a103-42c2e1ace8f1.png)
 
-# 계약 상태 확인 
+  - 계약 상태 확인 
 http GET http://20.200.226.177:8080/contracts/1
 
 ![image](https://user-images.githubusercontent.com/18524113/131062711-d772b713-8bad-47c6-badb-786d04c08998.png)

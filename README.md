@@ -240,18 +240,19 @@ public interface ContractRepository extends PagingAndSortingRepository<Contract,
 
 적용 후 REST API의 테스트
 - Contract 서비스의 렌탈계약처리
-http POST http://20.200.225.192:8080/contracts custName="고객2" modelName="쏘나타" amt=200
+http POST http://20.200.226.177:8080/contracts custName="고객1" modelName="쏘나타" amt=100
 
 ![image](https://user-images.githubusercontent.com/18524113/131062560-15d38a5a-8898-4492-a103-42c2e1ace8f1.png)
 
-![image](https://user-images.githubusercontent.com/11002207/131057169-469c335e-8927-49ea-89b1-fd08e43c4c40.png)
+# 계약 상태 확인 
+http GET http://20.200.226.177:8080/contracts/1
 
-- 예약 상태 확인 
-http GET http://20.200.225.192:8080/reservations/2
-![image](https://user-images.githubusercontent.com/11002207/131057205-149bbc5d-1cb8-40d8-9116-a2a59a787f4f.png)
+![image](https://user-images.githubusercontent.com/18524113/131062711-d772b713-8bad-47c6-badb-786d04c08998.png)
 
 
-#GateWay-적용
+
+
+# GateWay-적용
 API GateWay를 통하여 마이크로 서비스들의 집입점을 통일할 수 있다. 다음과 같이 GateWay를 적용하였다.
 
 ```java 

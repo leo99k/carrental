@@ -106,7 +106,7 @@
 
   - Event Storming 결과
     -MSAez 로 모델링한 이벤트스토밍 결과
-    ![image](https://user-images.githubusercontent.com/11002207/130976216-5507d61c-696a-4098-b402-95da99d7e3a9.png)
+    ![image](https://user-images.githubusercontent.com/18524113/131060798-ac4a4ba1-9a36-43d0-8583-fa58e078a8d6.png)
 
   - 헥사고날 아키텍처 다이어그램 도출
   ![image](https://user-images.githubusercontent.com/18524113/131060744-03ff0c32-b624-423e-8ab8-b05dbf9800ad.png)

@@ -7,7 +7,7 @@
   - [분석/설계](#분석설계)
   - [구현:](#구현-)
     - [DDD 의 적용](#ddd-의-적용)
-	- [GateWay 적용](#GateWay 적용)
+	- [GateWay적용](#GateWay-적용)
 	- [CQRS/saga/correlation](#폴리글랏-퍼시스턴스)
     - [동기식 호출 과 Fallback 처리](#동기식-호출-과-Fallback-처리)
 	- [폴리글랏 퍼시스턴스](#폴리글랏-퍼시스턴스)

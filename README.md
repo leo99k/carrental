@@ -110,6 +110,10 @@
 
   - 헥사고날 아키텍처 다이어그램 도출
   ![image](https://user-images.githubusercontent.com/18524113/131060744-03ff0c32-b624-423e-8ab8-b05dbf9800ad.png)
+  - Chris Richardson, MSA Patterns 참고하여 Inbound adaptor와 Outbound adaptor를 구분함
+  - 호출관계에서 PubSub 과 Req/Resp 를 구분함
+  - 서브 도메인과 바운디드 컨텍스트의 분리:  각 팀의 KPI 별로 아래와 같이 관심 구현 스토리를 나눠가짐
+
 
 # 구현
 분석/설계 단계에서 도출된 헥사고날 아키텍처에 따라, 각 BC별로 대변되는 마이크로 서비스들을 스프링부트로 구현하였다. 구현한 각 서비스를 로컬에서 실행하는 방법은 아래와 같다 (각자의 포트넘버는 8081 ~ 808n 이다)

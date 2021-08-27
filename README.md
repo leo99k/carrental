@@ -64,6 +64,8 @@ spring:
 
 ---
 
+```yaml
+
 spring:
   profiles: docker
   cloud:

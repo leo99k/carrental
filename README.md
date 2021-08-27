@@ -339,14 +339,16 @@ port: 8080
 ![image](https://user-images.githubusercontent.com/11002207/131057389-8d7604ae-7756-45da-8472-d162379b299b.png)
 
 
-- CQRS/saga/correlation
-Materialized View를 구현하여, 타 마이크로서비스의 데이터 원본에 접근없이(Composite 서비스나 조인SQL 등 없이)도 내 서비스의 화면 구성과 잦은 조회가 가능하게 구현해 두었다. 본 프로젝트에서 View 역할은 MyPages 서비스가 수행한다.
-- 비동기식으로 처리되어 발행된 이벤트 기반 Kafka 를 통해 수신/처리 되어 별도 Table 에 관리한다
-- viewpage MSA ViewHandler 를 통해 구현
 
-![image](https://user-images.githubusercontent.com/11002207/131057464-3e609489-7011-4659-995e-889e2018a4c5.png)
+  - CQRS/saga/correlation
 
-![image](https://user-images.githubusercontent.com/11002207/131057480-8450645e-4425-4a2d-a1d3-d4b16d4af82f.png)
+    - Materialized View를 구현하여, 타 마이크로서비스의 데이터 원본에 접근없이(Composite 서비스나 조인SQL 등 없이)도 내 서비스의 화면 구성과 잦은 조회가 가능하게 구현해 두었다. 본 프로젝트에서 View 역할은 MyPages 서비스가 수행한다.
+    - 비동기식으로 처리되어 발행된 이벤트 기반 Kafka 를 통해 수신/처리 되어 별도 Table 에 관리한다
+    - viewpage MSA ViewHandler 를 통해 구현
+
+![image](https://user-images.githubusercontent.com/18524113/131063233-ff00a9cc-df94-4b7f-8360-42e59e2011c1.png)
+
+![image](https://user-images.githubusercontent.com/18524113/131063282-488933d5-187d-4f10-bb7d-f7a5be4febe8.png)
 
 계약 실행 후 MyPages 화면
 ![image](https://user-images.githubusercontent.com/11002207/131057509-c690ac7b-b976-477a-b648-025f90dce1f1.png)

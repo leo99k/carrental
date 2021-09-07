@@ -26,14 +26,12 @@ public class Pay {
         BeanUtils.copyProperties(this, payed);
         payed.setPaystatus("paid");
         
-        if ("Liveness".equals(this.getCustName())) {
-	        try {
-	        	System.out.println("################### 지연 설정 처리  #############################  ");
-	            Thread.currentThread().sleep((long) (1000000));
-	        } catch (InterruptedException e) {
-	        	System.out.println("################### 지연 설정 처리 에러남  #############################  ");
-	            e.printStackTrace();
-	        }
+        if ("Delay".equals(this.getCustName())) {
+            try {
+                Thread.currentThread().sleep((long) (500 + Math.random() * 220));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         
         

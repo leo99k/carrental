@@ -28,7 +28,7 @@ public class PolicyHandler{
             reservation.setCustName(payed.getCustName());
             reservation.setModelName(payed.getModelName());
             reservation.setAmt(payed.getAmt());
-            reservation.setPayStatus(payed.getPaystatus());
+            reservation.setPayStatus("paid");
             reservation.setReservationStatus("reserved");
             System.out.println("################### 1111111111 payed.toJson() ##############################" + payed.toJson());
             reservationRepository.save(reservation);

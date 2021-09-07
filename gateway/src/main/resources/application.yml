@@ -24,6 +24,10 @@ spring:
           uri: http://localhost:8084
           predicates:
             - Path= /myPages/**
+        - id: message
+          uri: http://localhost:8085
+          predicates:
+            - Path=/messages/** 
       globalcors:
         corsConfigurations:
           '[/**]':
@@ -59,6 +63,10 @@ spring:
           uri: http://Mypage:8080
           predicates:
             - Path= /myPages/**
+        - id: message
+          uri: http://message:8080
+          predicates:
+            - Path=/messages/** 
       globalcors:
         corsConfigurations:
           '[/**]':
